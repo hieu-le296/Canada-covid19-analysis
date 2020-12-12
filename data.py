@@ -33,9 +33,10 @@ class Data:
     def write_to_csv(self, csv_file, covid_list):
         csv_writer = csv.writer(csv_file, delimiter=',')
 
-        header = ['Date', 'New_Cases', 'New_Death', 'New_Recoveries', 'Total_Cases', 'Total_Death', 'Total_Recoveries']
+        header = ['Date', 'Num_of_days', 'New_Cases', 'New_Death', 'New_Recoveries', 'Total_Cases', 'Total_Death', 'Total_Recoveries']
         csv_writer.writerow(header)
         
+        num_of_days = 0
         for item in covid_list:
             date = item['date']
         
@@ -69,5 +70,7 @@ class Data:
             else:
                 total_recoveries = item['total_recoveries']
 
-            line = [date, new_cases, new_deaths, new_recoveries, total_cases, total_death, total_recoveries]
+            num_of_days = num_of_days + 1
+
+            line = [date, num_of_days, new_cases, new_deaths, new_recoveries, total_cases, total_death, total_recoveries]
             csv_writer.writerow(line)
